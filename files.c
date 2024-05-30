@@ -11,7 +11,6 @@
 void deleteFile(char* file);
 
 void getFileStat(struct stat* sb, char* name){
-
     if(stat(name, sb) == -1){
         perror("Error Occurred ");
         exit(1);
@@ -19,10 +18,7 @@ void getFileStat(struct stat* sb, char* name){
 }
 
 double getTimeDiff(char* file){
-
-    char delPath[PATH_MAX];
-    strcpy(delPath,trash_can);
-    joinPath(delPath, file);
+    char *delPath = joinPath(trash_can, file);
 
     struct stat sb;
     getFileStat(&sb,delPath);
@@ -62,9 +58,7 @@ void startDeleting(void){
 
 
 void deleteFile(char* file){
-    char delPath[PATH_MAX];
-    strcpy(delPath,trash_can);
-    joinPath(delPath, file);
+    char *delPath = joinPath(trash_can, file);
 
     if(remove(delPath) == 0){
         printf("%s removed \n",file);
